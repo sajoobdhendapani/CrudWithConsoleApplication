@@ -16,23 +16,21 @@ namespace TestDeteils.ConsoleApplication
         }
         public void Menu()
         {
-            int a = 5;
+            int a = 4;
             do
             {
                 Console.WriteLine("1 Insert");
                 Console.WriteLine("2 Read");
                 Console.WriteLine("3 Delete");
                 Console.WriteLine("4 Update");
-                Console.WriteLine("5 Read By number");
-                Console.WriteLine("Enter the number");
-                Console.WriteLine("6 Exit ");
+                Console.WriteLine("5 Exit ");
                 Console.WriteLine("Enter The Number");
                 a = Convert.ToInt32(Console.ReadLine());
 
                 switch (a)
                 {
                     case 1:
-                        Console.WriteLine("No of product count needer");
+                        Console.WriteLine("No of testDetails count needed");
                         int count = Convert.ToInt32(Console.ReadLine());
                         for (int i = 0; i < count; i++)
                         {
@@ -46,8 +44,8 @@ namespace TestDeteils.ConsoleApplication
                             test.Duration = Convert.ToDouble(Console.ReadLine());
                             Console.WriteLine("Enter the Score");
                             test.Score = Convert.ToInt64(Console.ReadLine());
-
-                            test.StartDate = DateTime.Today;
+                            Console.WriteLine("Enter The Date");
+                            test.StartDate = Convert.ToDateTime(Console.ReadLine());
 
                             objTestDetails.InsertSP(test);
                         }break;
@@ -55,10 +53,10 @@ namespace TestDeteils.ConsoleApplication
                     case 2:
 
                         var read = objTestDetails.ReadSP();
-                        Console.WriteLine($"Id     Name    Number     Duration     Scope      StartDate");
+                        Console.WriteLine($"Id     Name    Number Duration    Scope      StartDate");
                         foreach(var R in read)
                         {
-                            Console.WriteLine($"{R.Id}\t{R.Name}\t{R.Number}\t{R.Duration}\t{R.Score}\t{R.StartDate}");
+                            Console.WriteLine($"{R.Id}\t{R.Name}\t{R.Number}\t{R.Duration}\t{R.Score}\t{R.StartDate.ToString("MM-dd-yyyy")}");
                         }
                         break;
                     case 3:
@@ -67,8 +65,31 @@ namespace TestDeteils.ConsoleApplication
                         var dl = objTestDetails.DeleteSP(delt);
                         break;
 
+                    case 4:
+                        Console.WriteLine("Enter the record update");
+                        long c = Convert.ToInt64(Console.ReadLine());
+                        TestDetails Updetails = new TestDetails();
+
+                        Console.WriteLine("Enter the Name");
+                        Updetails.Name = Console.ReadLine();
+                        Console.WriteLine("Enter the Number");
+                        Updetails.Number = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter the Duration");
+                        Updetails.Duration = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("Enter the Score");
+                        Updetails.Score = Convert.ToInt64(Console.ReadLine());
+                        Console.WriteLine("Enter the Date");
+                        Updetails.StartDate = Convert.ToDateTime(Console.ReadLine()); 
+
+                        objTestDetails.UpdateSP(c,Updetails);
+                        break;
+                    case 5:
+                        
+                        break;
+
                 }
-            } while (a != 6);
+            } while (a != 5);
+
         }
     }
 }

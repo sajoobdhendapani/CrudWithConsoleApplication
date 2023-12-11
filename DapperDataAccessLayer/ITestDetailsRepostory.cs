@@ -13,6 +13,6 @@ namespace DapperDataAccessLayer
         public TestDetails InsertSP(TestDetails details);
         public IEnumerable<TestDetails> ReadSP();
         public TestDetails DeleteSP(long Id);
-        public TestDetails UpdateSP();
+        public TestDetails UpdateSP(long Id, TestDetails UptdDetails);
     }
 }

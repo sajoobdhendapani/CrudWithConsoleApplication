@@ -82,17 +82,16 @@ namespace DapperDataAccessLayer
             }
             
         }
-        public TestDetails UpdateSP(long Id)
+        public TestDetails UpdateSP(long Id,TestDetails UptdDetails)
         {
             try
             {
                 var connectionString = "Data source=DESKTOP-CC47JG8\\SQLEXPRESS;initial catalog=batch7;user id=sa;password=Anaiyaan@123;";
                 var con = new SqlConnection(connectionString);
                 con.Open();
-                var TestDetails = con.QueryFirstOrDefault<TestDetails>($"exec Updateproduct @Id={Id},@name='{TestDetails.Name}',@number={prds.Number},@price={prds.Price},@gst={prds.Gst},@expirydate='{prds.ExpiryDate.ToString("MM-dd-yyyy")}'");
-                var 
-                ;
-
+                var TestDetails = con.QueryFirstOrDefault<TestDetails>($"exec UpdateTestDetails @id={Id}, @Name='{UptdDetails.Name}',@Number={UptdDetails.Number},@Duration={UptdDetails.Duration},@Score={UptdDetails.Score},@StartDate='{UptdDetails.StartDate.ToString("MM-dd-yyyy")}'");
+                con.Close();
+                return UptdDetails;
             }
             catch (SqlException sql)
             {
